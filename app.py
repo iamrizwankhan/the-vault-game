@@ -73,10 +73,10 @@ st.markdown("""
     text-align: center;
 }
 
-.small-text {
-    text-align: center;
-    font-size: 18px;
-    color: #4f6485;
+label {
+    color: #0b245b !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
 }
 
 .stButton > button {
@@ -156,31 +156,75 @@ if st.button("Submit Guess"):
 
         if guess == st.session_state.number:
 
-            st.success(
-                f"🎉 Vault Opened! You cracked the code in {st.session_state.attempts} attempts."
-            )
+            st.markdown(f"""
+<div style="
+background:#dcfce7;
+padding:22px;
+border-radius:14px;
+margin-top:20px;
+font-size:24px;
+font-weight:700;
+color:#166534;
+text-align:center;
+">
+🎉 Vault Opened!<br>
+You cracked the code in {st.session_state.attempts} attempts.
+</div>
+""", unsafe_allow_html=True)
 
             st.session_state.game_over = True
 
         elif guess < st.session_state.number:
 
-            st.warning(
-                f"📉 Too Low! Attempts Left: {attempts_left}"
-            )
+           st.markdown(f"""
+<div style="
+background:#fee2e2;
+padding:18px;
+border-radius:12px;
+margin-top:20px;
+font-size:22px;
+font-weight:700;
+color:#7f1d1d;
+">
+📉 Too Low! Attempts Left: {attempts_left}
+</div>
+""", unsafe_allow_html=True)
 
         else:
 
-            st.warning(
-                f"📈 Too High! Attempts Left: {attempts_left}"
-            )
+            st.markdown(f"""
+<div style="
+background:#dbeafe;
+padding:18px;
+border-radius:12px;
+margin-top:20px;
+font-size:22px;
+font-weight:700;
+color:#1e3a8a;
+">
+📈 Too High! Attempts Left: {attempts_left}
+</div>
+""", unsafe_allow_html=True)
 
         st.session_state.history.append(guess)
 
         if attempts_left == 0 and guess != st.session_state.number:
 
-            st.error(
-                f"💥 Game Over! The correct number was {st.session_state.number}"
-            )
+            st.markdown(f"""
+<div style="
+background:#fecaca;
+padding:22px;
+border-radius:14px;
+margin-top:20px;
+font-size:24px;
+font-weight:700;
+color:#991b1b;
+text-align:center;
+">
+💥 Game Over!<br>
+The correct number was {st.session_state.number}
+</div>
+""", unsafe_allow_html=True)
 
             st.session_state.game_over = True
 
